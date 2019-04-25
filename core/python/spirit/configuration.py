@@ -126,3 +126,18 @@ def SpinSpiral(p_state, direction_type, q_vector, axis, theta, pos=[0,0,0],
                 vec3(*border_rectangular), ctypes.c_float(border_cylindrical), 
                 ctypes.c_float(border_spherical), ctypes.c_bool(inverted), 
                 ctypes.c_int(idx_image), ctypes.c_int(idx_chain))
+
+### Hopfion configuration
+_Hopfion             = _spirit.Configuration_Hopfion
+_Hopfion.argtypes    = [ctypes.c_void_p, ctypes.c_float, ctypes.c_int, ctypes.POINTER(ctypes.c_float),
+                        ctypes.POINTER(ctypes.c_float), ctypes.c_float, ctypes.c_float, ctypes.c_bool,
+                        ctypes.c_int, ctypes.c_int]
+_Hopfion.restype     = None
+def hopfion(p_state, radius, order=1, pos=[0,0,0], border_rectangular=[-1,-1,-1],
+            border_cylindrical=-1, border_spherical=-1, inverted=False, idx_image=-1, idx_chain=-1):
+    vec3 = ctypes.c_float * 3
+    _Hopfion(ctypes.c_void_p(p_state), ctypes.c_float(radius), ctypes.c_int(order),
+             vec3(*pos), vec3(*border_rectangular), ctypes.c_float(border_cylindrical),
+             ctypes.c_float(border_spherical), ctypes.c_bool(inverted),
+             ctypes.c_int(idx_image), ctypes.c_int(idx_chain))
+

@@ -320,9 +320,9 @@ namespace Engine
                         if ( check_atom_type(this->geometry->atom_types[ispin]) && check_atom_type(this->geometry->atom_types[jspin]) &&
                                 check_atom_type(this->geometry->atom_types[kspin]))
                         {
-                            Energy[ispin] -= 1.0/3.0 * triplet_magnitudes1[itrip] * pow(spins[ispin].dot(spins[jspin].cross(spins[kspin])),2);
-                            Energy[jspin] -= 1.0/3.0 * triplet_magnitudes1[itrip] * pow(spins[ispin].dot(spins[jspin].cross(spins[kspin])),2);
-                            Energy[kspin] -= 1.0/3.0 * triplet_magnitudes1[itrip] * pow(spins[ispin].dot(spins[jspin].cross(spins[kspin])),2);
+                            Energy[ispin] -= 1.0/2.0 * triplet_magnitudes1[itrip] * pow(spins[ispin].dot(spins[jspin].cross(spins[kspin])),2);
+                            Energy[jspin] -= 1.0/2.0 * triplet_magnitudes1[itrip] * pow(spins[ispin].dot(spins[jspin].cross(spins[kspin])),2);
+                            Energy[kspin] -= 1.0/2.0 * triplet_magnitudes1[itrip] * pow(spins[ispin].dot(spins[jspin].cross(spins[kspin])),2);
 
 
                             Energy[ispin] -= 1.0/3.0 * triplet_magnitudes2[itrip] * spins[ispin].dot(spins[jspin].cross(spins[kspin]))
@@ -568,11 +568,11 @@ namespace Engine
                         if ( check_atom_type(this->geometry->atom_types[ispin]) && check_atom_type(this->geometry->atom_types[jspin]) &&
                                 check_atom_type(this->geometry->atom_types[kspin]))
                         {
-                            gradient[ispin] -= 2.0 * triplet_magnitudes1[itrip] * spins[ispin].dot(spins[jspin].cross(spins[kspin]))
+                            gradient[ispin] -= 3.0 * triplet_magnitudes1[itrip] * spins[ispin].dot(spins[jspin].cross(spins[kspin]))
                                                 * spins[jspin].cross(spins[kspin]);
-                            gradient[jspin] -= 2.0 * triplet_magnitudes1[itrip] * spins[ispin].dot(spins[jspin].cross(spins[kspin]))
+                            gradient[jspin] -= 3.0 * triplet_magnitudes1[itrip] * spins[ispin].dot(spins[jspin].cross(spins[kspin]))
                                                 * spins[kspin].cross(spins[ispin]);
-                            gradient[kspin] -= 2.0 * triplet_magnitudes1[itrip] * spins[ispin].dot(spins[jspin].cross(spins[kspin]))
+                            gradient[kspin] -= 3.0 * triplet_magnitudes1[itrip] * spins[ispin].dot(spins[jspin].cross(spins[kspin]))
                                                 * spins[ispin].cross(spins[jspin]);
                              
                             gradient[ispin] -= triplet_magnitudes2[itrip] * (n.dot(spins[ispin]+spins[jspin]+spins[kspin])
@@ -584,7 +584,6 @@ namespace Engine
                             gradient[kspin] -= triplet_magnitudes2[itrip] * (n.dot(spins[ispin]+spins[jspin]+spins[kspin])
                                                 * spins[ispin].cross(spins[jspin])
                                                + spins[ispin].dot(spins[jspin].cross(spins[kspin])) * n);
-                            std::cout << gradient[ispin] << "  \n" << gradient[jspin] << "  \n" << gradient[kspin] << "\n" << std::endl;
                         }
                     }
                 }

@@ -31,7 +31,7 @@ ConfigurationsWidget::ConfigurationsWidget(std::shared_ptr<State> state, SpinWid
 	// Setup User Interface
     this->setupUi(this);
 	this->groupBox_globule->setVisible(false);
-	this->groupBox_hopfion->setVisible(false);
+	//this->groupBox_hopfion->setVisible(false);
 
 	// We use a regular expression (regex) to filter the input into the lineEdits
 	QRegularExpression re("[+|-]?[\\d]*[\\.]?[\\d]*");
